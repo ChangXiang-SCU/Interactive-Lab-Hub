@@ -4,7 +4,7 @@ import os
 
 # Using the key provided by user. 
 # In production, this should be in os.environ.get("OPENAI_API_KEY")
-API_KEY = os.environ.get("OPENAI_API_KEY", "YOUR_OPENAI_API_KEY_HERE")
+API_KEY = os.environ.get("OPENAI_API_KEY")
 
 client = OpenAI(api_key=API_KEY)
 
@@ -75,7 +75,7 @@ def process_voice_query(query_text, inventory_context):
     try:
         response = client.chat.completions.create(
             model="gpt-3.5-turbo",
-            messages=[{"role": "system", "content": "You are FridgeMind, a helpful kitchen usage assistant."},
+            messages=[{"role": "system", "content": "You are FridgeMind, a helpful kitchen usage assistant. Always answer in the SAME language as the user's query (English or Chinese)."},
                       {"role": "user", "content": prompt}],
             max_tokens=150
         )
