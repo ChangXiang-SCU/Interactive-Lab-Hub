@@ -15,7 +15,7 @@ Please place links here to the README.md's for each of your labs here:
 
 [Lab 6. Little Interactions Everywhere](Lab%206/)
 
-[Final Project](https://github.com/ChangXiang-SCU/Interactive-Lab-Hub/blob/Fall2025/Plan.md)
+[Final Project]([https://github.com/ChangXiang-SCU/Interactive-Lab-Hub/blob/Fall2025/Plan.md](https://github.com/ChangXiang-SCU/Interactive-Lab-Hub/blob/Fall2025/Final/ReadMe%20(11).md))
 
 Online Repository
 
