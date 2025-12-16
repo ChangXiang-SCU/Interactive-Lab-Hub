@@ -23,8 +23,10 @@ class AudioService:
                 print("[Audio] Adjusting for ambient noise...")
                 self.recognizer.adjust_for_ambient_noise(source, duration=0.5)
                 print("[Audio] Listening...")
-                # Listen automatically stops after silence
-                audio = self.recognizer.listen(source, timeout=timeout, phrase_time_limit=phrase_time_limit)
+                # Allow even longer pauses (3 seconds)
+                self.recognizer.pause_threshold = 3.0
+                # Listen automatically stops after silence or max 30 seconds
+                audio = self.recognizer.listen(source, timeout=10, phrase_time_limit=30)
                 return audio
         except Exception as e:
             print(f"[Audio] Listen Error: {e}")

@@ -277,6 +277,32 @@ const ScanView = ({ onAddItem, setActiveTab }) => {
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
 
+  // Auto-Scan Polling for Continuous Vision
+  useEffect(() => {
+    let intervalId;
+
+    // Only poll if we don't have a result and aren't manually scanning
+    if (!result && !scanning) {
+      intervalId = setInterval(async () => {
+        try {
+          // Silent fetch
+          const response = await fetch(`${API_BASE}/api/scan/live`);
+          if (response.ok) {
+            const data = await response.json();
+            if (data.found) {
+              setResult(data);
+              // Beep or visual feedback could go here
+            }
+          }
+        } catch (err) {
+          // Ignore connection errors during background polling
+        }
+      }, 800); // Check every 800ms
+    }
+
+    return () => clearInterval(intervalId);
+  }, [result, scanning]);
+
   const handleScan = async () => {
     setScanning(true);
     setError(null);
